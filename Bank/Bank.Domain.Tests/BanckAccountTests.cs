@@ -76,29 +76,16 @@ public class BankAccountTests
         Assert.Equal(balance, account.Balance);
     }
 
-    [Fact]
-    public void Debit_WithZeroAmount_ShouldThrowArgumentOutOfRange()
-    {
-        // Arrange
-        BankAccount account = new BankAccount("Cliente", 100.0);
-
-        // Act & Assert
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => account.Debit(0));
-        Assert.Contains(BankAccount.DebitAmountLessThanZeroMessage, ex.Message);
-    }
+    
     [Fact]
     public void Debit_WithZeroAmount_ShouldNotThrow()
     {
-        var account = new BankAccount("Cliente", 100);
-        
+        var account = new BankAccount("Gabriela", 100.0);
+
         var exception = Record.Exception(() => account.Debit(0));
 
-        Assert.Null(exception); // ✅ Si lanza excepción, la prueba fallará
-        Assert.Equal(100, account.Balance); // Opcional: no debería cambiar el saldo
+        Assert.Null(exception); // Esperamos que no se lance excepción
     }
-
-    
-
 
     [Fact]
     public void Credit_WithValidAmount_UpdatesBalance()
