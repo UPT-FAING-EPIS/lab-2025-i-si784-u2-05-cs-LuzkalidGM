@@ -34,7 +34,7 @@ jobs:
       - name: Run Stryker mutation tests
         run: |
           cd Bank
-          dotnet stryker --project Bank.Domain.Tests/Bank.Domain.Tests.csproj --reporters "html" --output-path "../StrykerOutput"
+          dotnet stryker --project Bank.Domain.Tests/Bank.Domain.Tests.csproj --reporter "html" --output "../StrykerOutput"
 
       - name: Deploy mutation report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
