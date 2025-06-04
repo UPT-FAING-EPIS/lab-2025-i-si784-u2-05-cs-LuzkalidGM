@@ -33,12 +33,12 @@ jobs:
           cd Bank
           dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage" --results-directory ./TestResults
 
+      - name: Install ReportGenerator tool
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
       - name: Generate coverage report
-        uses: tj-actions/reportgenerator@v3
-        with:
-          reports: 'Bank/TestResults/**/coverage.cobertura.xml'
-          targetdir: 'coverage-report'
-          reporttypes: 'Html'
+        run: |
+          reportgenerator -reports:"Bank/TestResults/**/coverage.cobertura.xml" -targetdir:"coverage-report" -reporttypes:"Html"
 
       - name: Deploy coverage report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
